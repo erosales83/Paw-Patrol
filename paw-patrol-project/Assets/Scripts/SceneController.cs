@@ -1,21 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject prefab;
+    Vector3 position;
+
     void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+        float startingPosition = 0;
 
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+        for (int i = 0; i < 10; i++)
+        {
+            position = new Vector3(0.0f, 0.0f, 0.0f);
+            // Create an instance of the prefab.
+            GameObject obj = Instantiate(prefab, position, Quaternion.identity);
 
-    public void QuitGame()
-    {
-        Application.Quit();
+            // Initialize the move component.
+            obj.transform.position = new Vector3(
+                0, 0, startingPosition);
+            startingPosition = startingPosition + 100;
+        }      
     }
 }
