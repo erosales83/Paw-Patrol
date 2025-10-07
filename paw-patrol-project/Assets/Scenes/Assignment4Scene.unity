@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b31a1d113eace419d642591a00c60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  target: {fileID: 176098564}
+  target: {fileID: 0}
   offset: {x: 0, y: 20, z: 15}
 --- !u!1 &700881449
 GameObject:
@@ -480,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 1267785866}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -540,7 +540,8 @@ MonoBehaviour:
   Primary: {fileID: -1616811401919905496, guid: e57d9185240daef468276ccd7740083b, type: 3}
   Move: {fileID: 4992147502834737225, guid: e57d9185240daef468276ccd7740083b, type: 3}
   ManueveringSpeed: 5
-  BulletPrefab: {fileID: 0}
+  TreatPrefab: {fileID: 1438355307826361356, guid: eed947df6726b5f4f93923e3d33fa1c0, type: 3}
+  PrimaryDelay: 1
 --- !u!1001 &4506915651629272981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -563,7 +564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2420540555070578342, guid: 9b0ef29924704d745a2c1d372cd3e738, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2420540555070578342, guid: 9b0ef29924704d745a2c1d372cd3e738, type: 3}
       propertyPath: m_LocalRotation.w
