@@ -23,6 +23,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Secondary",
+                    "type": "Button",
+                    "id": "2898e7c6-f53e-4dff-be9c-dcf80adf24d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -51,7 +60,7 @@
                 {
                     "name": "up",
                     "id": "9cb786cd-bb47-456d-853b-a37d1f93b05b",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -62,7 +71,7 @@
                 {
                     "name": "down",
                     "id": "97271cc7-6d9c-4327-96f9-9c6cac8deb3f",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -73,7 +82,7 @@
                 {
                     "name": "left",
                     "id": "c8d3c3e4-157c-4d46-ab03-eb4f379af2af",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -84,13 +93,24 @@
                 {
                     "name": "right",
                     "id": "f653415b-f31c-4356-aea9-514966cac5fd",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0a5bf296-3b80-4f68-b52f-8096ecbd4f53",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Secondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
