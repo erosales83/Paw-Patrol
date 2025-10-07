@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(
             move.x * ManueveringSpeed * Time.deltaTime, 0.0f, move.y * ManueveringSpeed * Time.deltaTime);
 
-        if (primaryDown_ == true && Time.time >= primaryNextTime_ || secondaryDown_ == true && Time.time >= secondaryNextTime_)
+        if (primaryDown_ == true && Time.time >= primaryNextTime_ || secondaryDown_ == true && Time.time >= secondaryNextTime_  )
         {
             //Asked ChatGPT what Quaternion.identity is and asked what . shortcuts there were to allow me customize the visual rotation.
             //It advised me to use.Euler which helps me angle my object how I want it.
