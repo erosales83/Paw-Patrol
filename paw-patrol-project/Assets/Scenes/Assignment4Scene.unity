@@ -215,7 +215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 700881451}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &54433338
 MonoBehaviour:
@@ -338,12 +338,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206537155}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 700881451}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &206537159
 MonoBehaviour:
@@ -447,7 +447,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 206537158}
+  - {fileID: 54433337}
+  - {fileID: 1267785867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267785866
@@ -460,6 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1267785867}
   - component: {fileID: 1267785868}
+  - component: {fileID: 1267785869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -475,13 +479,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267785866}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 176098564}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 700881451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1267785868
 MonoBehaviour:
@@ -507,12 +511,36 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 597fa1e6-7d4b-4e6a-9c0b-dc67ea00b21f
+    m_ActionName: 'Gameplay/Primary[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9e574105-74e8-47e7-b2d7-a39fb8549c72
+    m_ActionName: 'Gameplay/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1267785869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267785866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96adc7fb827ffd4580cf37b15ef443a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  Primary: {fileID: -1616811401919905496, guid: e57d9185240daef468276ccd7740083b, type: 3}
+  Move: {fileID: 4992147502834737225, guid: e57d9185240daef468276ccd7740083b, type: 3}
+  ManueveringSpeed: 5
+  BulletPrefab: {fileID: 0}
 --- !u!1001 &4506915651629272981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,7 +602,4 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 206537158}
-  - {fileID: 54433337}
   - {fileID: 700881451}
-  - {fileID: 1267785867}
