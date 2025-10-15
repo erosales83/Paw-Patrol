@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public Vector3 offset;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //Used lateUpdate because youtube video mentioned it allows smooth following of player
     void LateUpdate()
     {
         if (target != null)
