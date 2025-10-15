@@ -3,7 +3,6 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public GameObject[] dogs;
-
     public float spawnInterval = 6f;
     public float spawnrange = 40f;
     public float spawnZ = 20f;
@@ -24,7 +23,8 @@ public class SpawnController : MonoBehaviour
     {
 
     }
-    
+
+    //Randomly spawns dogs
     void SpawnDog()
     {
         int lane = Random.Range(0, 5);

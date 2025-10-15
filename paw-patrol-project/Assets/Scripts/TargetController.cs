@@ -20,6 +20,7 @@ public class TargetController : MonoBehaviour
         transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
 
+    //Collision: If player collides with Dog Game over. If treat collides with dog then particles.
     private void OnCollisionEnter(Collision collision)
     {
 
