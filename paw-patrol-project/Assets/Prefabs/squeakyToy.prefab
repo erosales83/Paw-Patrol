@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3721e2dc768d291429188f7a9291c039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreatController
-  speed: 10
+  speed: 12
   shootSound: {fileID: 0}
 --- !u!82 &2556315632756778587
 AudioSource:
