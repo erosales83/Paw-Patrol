@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public InputActionReference Move;
     public float ManueveringSpeed = 0.1f;
     public GameObject TreatPrefab;
+    public GameObject SqueakyPrefab;
     public float PrimaryDelay = 1.0f;
     public float SecondaryDelay = 0.5f;
     private bool primaryDown_ = false;
@@ -32,12 +33,17 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(
             move.x * ManueveringSpeed * Time.deltaTime, 0.0f, move.y * ManueveringSpeed * Time.deltaTime);
 
-        if (primaryDown_ == true && Time.time >= primaryNextTime_ || secondaryDown_ == true && Time.time >= secondaryNextTime_  )
+        if (primaryDown_ == true && Time.time >= primaryNextTime_)
         {
             //Asked ChatGPT what Quaternion.identity is and asked what . shortcuts there were to allow me customize the visual rotation.
             //It advised me to use.Euler which helps me angle my object how I want it.
             Instantiate(TreatPrefab, transform.position, Quaternion.Euler(0, 90, 90));
             primaryNextTime_ = Time.time + PrimaryDelay;
+        }
+
+        if(secondaryDown_ && Time.time >= secondaryNextTime_)
+        {
+            Instantiate(SqueakyPrefab, transform.position, Quaternion.Euler(0, 90, 90));
             secondaryNextTime_ = Time.time + SecondaryDelay;
         }
     }
