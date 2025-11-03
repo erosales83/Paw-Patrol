@@ -7,9 +7,7 @@ public class TargetController : MonoBehaviour
 
     public float speed = 4f;
     public GameObject rescueEffect;
-    public AudioSource collisionSound;
-
-
+    public AudioManagerController AudioManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,36 +23,26 @@ public class TargetController : MonoBehaviour
     //Collision: If player collides with Dog Game over. If treat collides with dog then particles.
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collisionSound != null)
-            {
-                collisionSound.Play();
-                Destroy(gameObject, collisionSound.clip.length);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            if (AudioManager != null)
+        {
+            AudioManager.Play(AudioManager.Explosion);
+        }
             Time.timeScale = 0.0f;
         }
         if (collision.gameObject.CompareTag("Treat"))
         {
-            if (collisionSound != null)
+            if (AudioManager != null)
             {
-                collisionSound.Play();
-                Destroy(gameObject, collisionSound.clip.length);
-            }
-            else
-            {
-                Destroy(gameObject);
+                AudioManager.Play(AudioManager.Explosion);
             }
             if (rescueEffect != null)
             {
                 Instantiate(rescueEffect, transform.position, Quaternion.identity);
             }
             Destroy(collision.gameObject);
+            Destroy(gameObject);
             
         }
 

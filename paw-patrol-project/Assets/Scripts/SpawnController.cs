@@ -11,6 +11,8 @@ public class SpawnController : MonoBehaviour
     public float middleStreetX = 0f;
     public float rightStreetX = 5f;
     public float rightSidewalkX = 15f;
+    public AudioManagerController AudioManager;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,6 +53,12 @@ public class SpawnController : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
         GameObject spawnDog = dogs[Random.Range(0, dogs.Length)];
-        Instantiate(spawnDog, spawnPos, Quaternion.identity);
+        GameObject dog = Instantiate(spawnDog, spawnPos, Quaternion.identity);
+
+        TargetController targetController = dog.GetComponent<TargetController>(); 
+        if (targetController != null)
+        {
+            targetController.AudioManager = AudioManager;
+        } 
     }
 }
