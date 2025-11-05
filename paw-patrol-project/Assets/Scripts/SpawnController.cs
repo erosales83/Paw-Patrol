@@ -12,6 +12,7 @@ public class SpawnController : MonoBehaviour
     public float rightStreetX = 5f;
     public float rightSidewalkX = 15f;
     public AudioManagerController AudioManager;
+    public GameUIController GameUI;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -59,6 +60,7 @@ public class SpawnController : MonoBehaviour
         if (targetController != null)
         {
             targetController.AudioManager = AudioManager;
-        } 
+            targetController.GameUI = GameUI;
+        }
     }
 }

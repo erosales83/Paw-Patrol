@@ -30,9 +30,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
         Vector2 move = Move.action.ReadValue<Vector2>();
-        transform.position += new Vector3(
-            move.x * ManueveringSpeed * Time.deltaTime, 0.0f, move.y * ManueveringSpeed * Time.deltaTime);
+        transform.position += new Vector3(move.x * ManueveringSpeed * Time.deltaTime, 0.0f, move.y * ManueveringSpeed * Time.deltaTime);
 
         if (primaryDown_ == true && Time.time >= primaryNextTime_)
         {

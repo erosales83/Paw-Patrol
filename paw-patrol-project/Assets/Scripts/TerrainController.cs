@@ -7,6 +7,7 @@ public class TerrainController : MonoBehaviour
     public List<GameObject> spawnedStreet = new List<GameObject>();
     public float speed = 5f;
     Vector3 position;
+    private bool gameStarted = false;
 
     void Start()
     {
@@ -24,10 +25,15 @@ public class TerrainController : MonoBehaviour
 
             startingPosition += 100;
         }
+        Time.timeScale = 0f;
     }
 
     void Update()
     {
+        if (!gameStarted)
+        {
+            return;
+        }
         foreach (GameObject street in spawnedStreet)
         {
             street.transform.Translate(Vector3.back * speed * Time.deltaTime);
@@ -45,5 +51,11 @@ public class TerrainController : MonoBehaviour
                 }
             }
         }
+    }
+    public void StartGame()
+    {
+        Debug.Log("Game Started!");
+        gameStarted = true;
+        Time.timeScale = 1f;
     }
 }

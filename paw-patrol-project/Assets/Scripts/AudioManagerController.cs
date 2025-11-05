@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManagerController : MonoBehaviour
@@ -8,13 +9,12 @@ public class AudioManagerController : MonoBehaviour
     public AudioClip Attack1;
     public AudioClip Attack2;
     public AudioClip Explosion;
+    public AudioClip Failed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Music.clip = BackgroundSound;
-        Music.Play();
+        
     }
-
 
     // Update is called once per frame
     void Update()
@@ -25,5 +25,16 @@ public class AudioManagerController : MonoBehaviour
     public void Play(AudioClip clip)
     {
         SoundFX.PlayOneShot(clip);
+    }
+
+    public void PlayMusic()
+    {
+        Music.clip = BackgroundSound;
+        Music.Play();
+    }
+
+    public void StopMusic()
+    {
+        Music.Stop();
     }
 }

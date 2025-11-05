@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TargetController : MonoBehaviour
 {
@@ -8,6 +6,7 @@ public class TargetController : MonoBehaviour
     public float speed = 4f;
     public GameObject rescueEffect;
     public AudioManagerController AudioManager;
+    public GameUIController GameUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,13 +22,14 @@ public class TargetController : MonoBehaviour
     //Collision: If player collides with Dog Game over. If treat collides with dog then particles.
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("wall") || collision.gameObject.CompareTag("Player"))
         {
             if (AudioManager != null)
-        {
-            AudioManager.Play(AudioManager.Explosion);
-        }
-            Time.timeScale = 0.0f;
+            {
+                AudioManager.Play(AudioManager.Failed);
+            }
+            GameUI.TakeHit(25);
+            Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("Treat"))
         {
@@ -41,9 +41,10 @@ public class TargetController : MonoBehaviour
             {
                 Instantiate(rescueEffect, transform.position, Quaternion.identity);
             }
+            GameUI.AddScore(100);
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            
+
         }
 
     }
