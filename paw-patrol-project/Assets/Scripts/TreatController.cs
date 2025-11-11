@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class TreatController : MonoBehaviour
@@ -14,6 +15,13 @@ public class TreatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        if (gameObject.name.Contains("squeakyToy"))
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        }
     }
 }

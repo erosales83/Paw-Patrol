@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,12 +6,14 @@ using UnityEngine.UIElements;
 public class GameUIController : MonoBehaviour
 {
     public AudioManagerController AudioManager;
+    public SpawnController spawnController;
     private Label gameOverText_;
     private Label score_;
     private Label health_;
     private VisualElement[] lives_;
     public TerrainController TerrainController;
     private Button startButton_;
+    private Button restartButton_;
     public int maxLives = 3;
     public int currentLives;
     public int maxHealth = 100;
@@ -37,13 +40,17 @@ public class GameUIController : MonoBehaviour
         lives_[1] = root.Q<VisualElement>("Live-2");
         lives_[2] = root.Q<VisualElement>("Live-3");
         startButton_ = root.Q<Button>("StartButton");
+        restartButton_ = root.Q<Button>("RestartButton");
         startButton_.clicked += OnStartButtonClicked;
+        restartButton_.clicked += OnRestartButtonClicked;
         gameOverText_ = root.Q<Label>("GameOver");
         gameOverText_.style.display = DisplayStyle.None;
+        restartButton_.style.display = DisplayStyle.None;
     }
     public void OnDisable()
     {
         startButton_.clicked -= OnStartButtonClicked;
+        restartButton_.clicked -= OnRestartButtonClicked;
     }
 
     void ResetGame()
@@ -58,16 +65,32 @@ public class GameUIController : MonoBehaviour
             life.style.display = DisplayStyle.Flex;
         }
     }
+    void ResetLevel()
+    {
+        Debug.Log("RESTART LEVEL");
+        spawnController.StartSpawn();
+    }
 
     public void OnStartButtonClicked()
     {
         ResetGame();
+        gameOverText_.style.display = DisplayStyle.None;
         startButton_.style.display = DisplayStyle.None;
         Time.timeScale = 1f;
         TerrainController.StartGame();
+        spawnController.StartSpawn();
         AudioManager.PlayMusic();
     }
-
+    public void OnRestartButtonClicked()
+    {
+        ResetGame();
+        gameOverText_.style.display = DisplayStyle.None;
+        restartButton_.style.display = DisplayStyle.None;
+        Time.timeScale = 1f;
+        TerrainController.StartGame();
+        spawnController.StartSpawn();
+        AudioManager.PlayMusic();
+    }
     public void SetScore(int score)
     {
         score_.text = score.ToString("D5");
@@ -95,6 +118,9 @@ public class GameUIController : MonoBehaviour
         if (currentLives >= 0 && currentLives < lives_.Length)
         {
             lives_[currentLives].style.display = DisplayStyle.None;
+            spawnController.ClearObjects();
+            spawnController.StopSpawn();
+            ResetLevel();
         }
         if (currentLives <= 0)
         {
@@ -114,6 +140,9 @@ public class GameUIController : MonoBehaviour
         Debug.Log("GAME OVER");
         Time.timeScale = 0f;
         AudioManager.StopMusic();
+        spawnController.StopSpawn();
+        spawnController.ClearObjects();
         gameOverText_.style.display = DisplayStyle.Flex;
+        restartButton_.style.display = DisplayStyle.Flex;
     }
 }

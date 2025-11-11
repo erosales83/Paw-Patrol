@@ -90,15 +90,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61897182686148305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.17364825, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 15, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 353225973726990272}
   - {fileID: 8697385039706991125}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7973607798028025200
 Animator:
   serializedVersion: 7
@@ -133,9 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b455344ecee0abe48bbe6ed44b126d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetController
-  speed: 2
+  speed: 4
   rescueEffect: {fileID: 4067684639605738966, guid: 08811944ccab80942a7d482e77d0c534, type: 3}
-  collisionSound: {fileID: 0}
+  crashEffect: {fileID: 4067684639605738966, guid: 053fa33c041555d40a6229280e097b36, type: 3}
+  AudioManager: {fileID: 0}
+  GameUI: {fileID: 0}
 --- !u!54 &6899560368146434604
 Rigidbody:
   m_ObjectHideFlags: 0

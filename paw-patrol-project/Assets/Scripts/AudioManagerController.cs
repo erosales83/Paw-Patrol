@@ -10,6 +10,7 @@ public class AudioManagerController : MonoBehaviour
     public AudioClip Attack2;
     public AudioClip Explosion;
     public AudioClip Failed;
+    public AudioClip Crashed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
