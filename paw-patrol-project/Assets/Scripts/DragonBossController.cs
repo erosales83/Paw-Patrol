@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class DragonBossController : MonoBehaviour
 {
     public AudioManagerController AudioManager;
+    public GameManagerController GameManager;
     public GameUIController GameUI;
     public int maxHits = 20;
     private int currentHits;
@@ -26,7 +27,16 @@ public class DragonBossController : MonoBehaviour
 
     void MoveSideToSide()
     {
-        float targetX = movingRight ? startPos.x + moveRange : startPos.x - moveRange;
+        float targetX;
+
+        if (movingRight)
+        {
+            targetX = startPos.x + moveRange;
+        }
+        else
+        {
+            targetX = startPos.x - moveRange;
+        }
 
         transform.position = Vector3.MoveTowards(
             transform.position,
@@ -68,6 +78,9 @@ public class DragonBossController : MonoBehaviour
 
         GameUI.AddScore(1000);
         Destroy(gameObject);
+        PlayerInfoController.Score = GameManager.currentScore;
+        PlayerInfoController.Health = GameManager.currentHealth;
+        PlayerInfoController.Lives  = GameManager.currentLives;
         PlayerInfoController.level = 4;
         Debug.Log("Loading Level 4....");
         SceneManager.LoadScene("AssignmentFinalProjectLevel4");

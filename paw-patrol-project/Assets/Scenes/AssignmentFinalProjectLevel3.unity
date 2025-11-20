@@ -538,7 +538,6 @@ MonoBehaviour:
   - {fileID: 4647385085009159818, guid: b370330d4c024324193279b794d2fbd1, type: 3}
   dragon: {fileID: 2132637239080067500, guid: 5b69c0e9915b0e745b580819023c82e0, type: 3}
   villianSpawnInterval: 2
-  cageSpawnInterval: 8
   villianFrontSpawnZ: 45
   villianBackSpawnZ: -45
   leftSidewalkX: -15
@@ -548,6 +547,7 @@ MonoBehaviour:
   rightSidewalkX: 15
   AudioManager: {fileID: 1477063776}
   GameUI: {fileID: 497734770}
+  GameManager: {fileID: 1530068734}
 --- !u!114 &434616568
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1329,6 +1329,7 @@ MonoBehaviour:
   rightSidewalkX: 15
   AudioManager: {fileID: 1477063776}
   GameUI: {fileID: 497734770}
+  GameManager: {fileID: 1539406758}
 --- !u!1 &1830914569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a7c96e562d2bf4e8dda6734ca59425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLevelController
-  levelDuration: 40
+  levelDuration: 5
   GameManager: {fileID: 1539406758}
 --- !u!1 &2057248653
 GameObject:

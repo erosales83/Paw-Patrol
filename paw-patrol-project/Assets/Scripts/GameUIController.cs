@@ -29,6 +29,7 @@ public class GameUIController : MonoBehaviour
         Time.timeScale = 1f;
         if (autoStart)
         {
+            // Consulted the internet on how to pause a frame so UI can load to prevent crashes.
             if(PlayerInfoController.level == 2)
             {
                 StartCoroutine(StartLevelTwo());

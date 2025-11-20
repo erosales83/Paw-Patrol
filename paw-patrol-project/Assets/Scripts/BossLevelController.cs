@@ -16,6 +16,7 @@ public class BossLevelController : MonoBehaviour
     private GameObject dragonInstance;
     public AudioManagerController AudioManager;
     public GameUIController GameUI;
+    public GameManagerController GameManager;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -115,6 +116,7 @@ public class BossLevelController : MonoBehaviour
         {
             boss.AudioManager = AudioManager;
             boss.GameUI = GameUI;
+            boss.GameManager = GameManager;
         }
     }
 }
