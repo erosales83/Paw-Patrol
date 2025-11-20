@@ -7,6 +7,7 @@ public class SpawnController : MonoBehaviour
     public GameObject[] rightCar;
     public GameObject[] leftKid;
     public GameObject[] rightKid;
+    public GameObject specialTreat;
     public float dogSpawnInterval = 4f;
     public float carSpawnInterval = 10f;
     public float kidSpawnInterval = 8f;

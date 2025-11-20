@@ -583,6 +583,7 @@ MonoBehaviour:
   - {fileID: 4324561456804164546, guid: 478bef213b971ea47a14e4dc5d9fa3ef, type: 3}
   - {fileID: 289548192201890597, guid: b042929f0620d2d4196964857f55b9fa, type: 3}
   - {fileID: 871081706790344141, guid: 0f2372b8f9f308d4982e3d7836d6dc1c, type: 3}
+  specialTreat: {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
   dogSpawnInterval: 4
   carSpawnInterval: 10
   kidSpawnInterval: 8
