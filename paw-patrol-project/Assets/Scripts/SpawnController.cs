@@ -78,6 +78,7 @@ public class SpawnController : MonoBehaviour
             targetController.AudioManager = AudioManager;
             targetController.GameUI = GameUI;
             targetController.spawner = this;
+            targetController.bossLevel = null;
         }
     }
     void SpawnCar()
@@ -92,6 +93,7 @@ public class SpawnController : MonoBehaviour
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
             leftTargetController.spawner = this;
+            leftTargetController.bossLevel = null;
         }
         GameObject randomRightCar = rightCar[Random.Range(0, rightCar.Length)];
         Vector3 rightCarPos = new Vector3(rightStreetX, 0f, carRightSpawnZ);
@@ -103,6 +105,7 @@ public class SpawnController : MonoBehaviour
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
             rightTargetController.spawner = this;
+            rightTargetController.bossLevel = null;
         }
     }
     void SpawnKid()
@@ -117,6 +120,7 @@ public class SpawnController : MonoBehaviour
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
             leftTargetController.spawner = this;
+            leftTargetController.bossLevel = null;
         }
 
 
@@ -130,6 +134,7 @@ public class SpawnController : MonoBehaviour
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
             rightTargetController.spawner = this;
+            rightTargetController.bossLevel = null;
         }
     }
     void SpawnSpecialtreat()
@@ -179,6 +184,7 @@ public class SpawnController : MonoBehaviour
             targetController.AudioManager = AudioManager;
             targetController.GameUI = GameUI;
             targetController.spawner = this;
+            targetController.bossLevel = null;
 
         }
     }

@@ -73,11 +73,13 @@ public class BossLevelController : MonoBehaviour
         GameObject spawnVillian = villians[Random.Range(0, villians.Length)];
         Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
         GameObject villian = Instantiate(spawnVillian, spawnPos, rotation);
-        TargetController targetController = villian.GetComponent<TargetController>();
-        if (targetController != null)
+        TargetController target = villian.GetComponent<TargetController>();
+        if (target != null)
         {
-            targetController.AudioManager = AudioManager;
-            targetController.GameUI = GameUI;
+            target.AudioManager = AudioManager;
+            target.GameUI = GameUI;
+            target.spawner = null;
+            target.bossLevel = this;
         }
     }
     void SpawnSpecialtreat()
@@ -121,11 +123,13 @@ public class BossLevelController : MonoBehaviour
         GameObject special = specialTreat;
         Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
         GameObject treat = Instantiate(special, spawnPos, rotation);
-        TargetController targetController = treat.GetComponent<TargetController>();
-        if (targetController != null)
+        TargetController target = treat.GetComponent<TargetController>();
+        if (target != null)
         {
-            targetController.AudioManager = AudioManager;
-            targetController.GameUI = GameUI;
+            target.AudioManager = AudioManager;
+            target.GameUI = GameUI;
+            target.spawner = null;
+            target.bossLevel = this;
         }
     }
 

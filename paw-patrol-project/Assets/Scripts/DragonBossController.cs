@@ -64,32 +64,6 @@ public class DragonBossController : MonoBehaviour
             TakeHit();
             return;
         }
-        if(gameObject.CompareTag("PowerUp") && collision.gameObject.CompareTag("Treat"))
-        {
-            GameUI.AddScore(100);
-            bossLevel.ClearBadObjects();
-            if (AudioManager != null)
-            {
-                AudioManager.Play(AudioManager.specialTreatSound);
-            }
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-            return;
-        } 
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (gameObject.CompareTag("PowerUp"))
-            {
-                GameUI.AddScore(100);
-                bossLevel.ClearBadObjects();
-                if (AudioManager != null)
-                {
-                    AudioManager.Play(AudioManager.specialTreatSound);
-                }
-                Destroy(gameObject);
-            }
-            return;
-        }
     }
     void TakeHit()
     {
