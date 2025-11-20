@@ -5,7 +5,7 @@ public class TerrainController : MonoBehaviour
 {
     public GameObject prefab;
     public List<GameObject> spawnedStreet = new List<GameObject>();
-    public float speed = 5f;
+    public float speed = 10f;
     Vector3 position;
     private bool gameStarted = false;
 
@@ -47,8 +47,8 @@ public class TerrainController : MonoBehaviour
                     {
                         farStreet = s.transform.position.z;
                     }
-                    street.transform.position = new Vector3(0, 0, farStreet + 100);
                 }
+                street.transform.position = new Vector3(0, 0, farStreet + 100);
             }
         }
     }

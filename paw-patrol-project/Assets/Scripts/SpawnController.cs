@@ -3,19 +3,26 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public GameObject[] dogs;
-    public GameObject leftCar;
-    public GameObject rightCar;
+    public GameObject[] leftCar;
+    public GameObject[] rightCar;
+    public GameObject[] leftKid;
+    public GameObject[] rightKid;
     public float dogSpawnInterval = 4f;
     public float carSpawnInterval = 10f;
+    public float kidSpawnInterval = 8f;
     public float corgiSpawnZ = 45f;
     public float germanSpawnZ = -45f;
     public float carLeftSpawnZ = 45f;
     public float carRightSpawnZ = -45f;
+    public float kidLeftSpawnZ = 45f;
+    public float kidRightSpawnZ = -45f;
     public float leftSidewalkX = -15f;
-    public float leftStreetX = -5f;
+    public float leftStreetX = -4f;
     public float middleStreetX = 0f;
-    public float rightStreetX = 5f;
+    public float rightStreetX = 3f;
     public float rightSidewalkX = 15f;
+    public float leftBikeLane = -10f;
+    public float rightBikeLane = 10f;
     public AudioManagerController AudioManager;
     public GameUIController GameUI;
 
@@ -72,9 +79,33 @@ public class SpawnController : MonoBehaviour
     }
     void SpawnCar()
     {
+        GameObject randomLeftCar = leftCar[Random.Range(0, leftCar.Length)];
         Vector3 leftCarPos = new Vector3(leftStreetX, 0f, carLeftSpawnZ);
         Quaternion leftCarRotation = Quaternion.Euler(0f, 180f, 0f);
-        GameObject left = Instantiate(leftCar, leftCarPos, leftCarRotation);
+        GameObject left = Instantiate(randomLeftCar, leftCarPos, leftCarRotation);
+        TargetController leftTargetController = left.GetComponent<TargetController>();
+        if (leftTargetController != null)
+        {
+            leftTargetController.AudioManager = AudioManager;
+            leftTargetController.GameUI = GameUI;
+        }
+        GameObject randomRightCar = rightCar[Random.Range(0, rightCar.Length)];
+        Vector3 rightCarPos = new Vector3(rightStreetX, 0f, carRightSpawnZ);
+        Quaternion rightCarRotation = Quaternion.identity;
+        GameObject right = Instantiate(randomRightCar, rightCarPos, rightCarRotation);
+        TargetController rightTargetController = right.GetComponent<TargetController>();
+        if (rightTargetController != null)
+        {
+            rightTargetController.AudioManager = AudioManager;
+            rightTargetController.GameUI = GameUI;
+        }
+    }
+    void SpawnKid()
+    {
+        GameObject randomLeftKid = leftKid[Random.Range(0, leftKid.Length)];
+        Vector3 leftKidPos = new Vector3(leftBikeLane, 0f, kidLeftSpawnZ);
+        Quaternion leftKidRotation = Quaternion.Euler(0f, 180f, 0f);
+        GameObject left = Instantiate(randomLeftKid, leftKidPos, leftKidRotation);
         TargetController leftTargetController = left.GetComponent<TargetController>();
         if (leftTargetController != null)
         {
@@ -82,9 +113,11 @@ public class SpawnController : MonoBehaviour
             leftTargetController.GameUI = GameUI;
         }
 
-        Vector3 rightCarPos = new Vector3(rightStreetX, 0f, carRightSpawnZ);
-        Quaternion rightCarRotation = Quaternion.identity;
-        GameObject right = Instantiate(rightCar, rightCarPos, rightCarRotation);
+
+        GameObject randomRightKid = rightKid[Random.Range(0, rightKid.Length)];
+        Vector3 rightKidPos = new Vector3(rightBikeLane, 0f, kidRightSpawnZ);
+        Quaternion rightKidRotation = Quaternion.identity;
+        GameObject right = Instantiate(randomRightKid, rightKidPos, rightKidRotation);
         TargetController rightTargetController = right.GetComponent<TargetController>();
         if (rightTargetController != null)
         {
@@ -94,8 +127,17 @@ public class SpawnController : MonoBehaviour
     }
     public void StartSpawn()
     {
-        InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
-        InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
+        if(PlayerInfoController.level == 1)
+        {
+            InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
+            InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
+        }
+        else if (PlayerInfoController.level == 2)
+        {
+            InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
+            InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
+            InvokeRepeating(nameof(SpawnKid), 3f, kidSpawnInterval);
+        }
     }
     public void ClearObjects()
     {
@@ -108,10 +150,15 @@ public class SpawnController : MonoBehaviour
         {
             Destroy(car); 
         }
+        foreach(GameObject kid in GameObject.FindGameObjectsWithTag("Kid"))
+        {
+            Destroy(kid);
+        }
     }
     public void StopSpawn()
     {
         CancelInvoke(nameof(SpawnDog));
         CancelInvoke(nameof(SpawnCar));
+        CancelInvoke(nameof(SpawnKid));
     }
 }

@@ -264,15 +264,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 972241819803244112, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 972241819803244112, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 972241819803244112, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 972241819803244112, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -323,10 +323,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 447484070546803946, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1264722415}
+      addedObject: {fileID: 1264722414}
     - targetCorrespondingSourceObject: {fileID: 447484070546803946, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1264722414}
+      addedObject: {fileID: 1264722415}
   m_SourcePrefab: {fileID: 100100000, guid: 1dd6720654a947a4784b1e90ab3a24a8, type: 3}
 --- !u!1 &185930036 stripped
 GameObject:
@@ -485,68 +485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   target: {fileID: 0}
   offset: {x: 0, y: 20, z: 15}
---- !u!1 &434616565
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 434616566}
-  - component: {fileID: 434616567}
-  m_Layer: 0
-  m_Name: Objects
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &434616566
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434616565}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 700881451}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &434616567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434616565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf11187bdfb8b1b4b8e708eb367f957c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnController
-  dogs:
-  - {fileID: 1226566921469968346, guid: cc6b3e636f70b5044994ea3e192717ac, type: 3}
-  - {fileID: 61897182686148305, guid: 08250735777543a429458bca8f4f22f0, type: 3}
-  leftCar: {fileID: 7593742948929567171, guid: 59918eae7c65f8f4d924791c2fb0b679, type: 3}
-  rightCar: {fileID: 7593742948929567171, guid: c70edeb18799fd746a1ef7ad96a5afb5, type: 3}
-  dogSpawnInterval: 4
-  carSpawnInterval: 10
-  corgiSpawnZ: 45
-  germanSpawnZ: -45
-  carLeftSpawnZ: 45
-  carRightSpawnZ: -45
-  leftSidewalkX: -15
-  leftStreetX: -5
-  middleStreetX: 0
-  rightStreetX: 5
-  rightSidewalkX: 15
-  AudioManager: {fileID: 1477063776}
-  GameUI: {fileID: 497734770}
 --- !u!1 &497734767
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,12 +553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07684e606a4fa3647bd3381f81aca9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUIController
-  AudioManager: {fileID: 1477063776}
-  spawnController: {fileID: 434616567}
   TerrainController: {fileID: 700881450}
-  maxLives: 3
-  currentLives: 0
-  maxHealth: 100
+  AudioManager: {fileID: 1477063776}
+  spawnController: {fileID: 1783624382}
+  GameManager: {fileID: 1539406758}
+  BossLevel: {fileID: 1783624383}
+  autoStart: 0
 --- !u!1 &700881449
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   prefab: {fileID: 4736653187010266410, guid: 99113f409a5ebb241bb28068ae20015a, type: 3}
   spawnedStreet: []
-  speed: 5
+  speed: 10
 --- !u!4 &700881451
 Transform:
   m_ObjectHideFlags: 0
@@ -668,11 +606,13 @@ Transform:
   m_Children:
   - {fileID: 1477063777}
   - {fileID: 54433337}
+  - {fileID: 1539406759}
   - {fileID: 206537158}
-  - {fileID: 497734769}
-  - {fileID: 1267785867}
-  - {fileID: 434616566}
+  - {fileID: 2044635895}
   - {fileID: 2057248654}
+  - {fileID: 497734769}
+  - {fileID: 1783624381}
+  - {fileID: 1267785867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &837608338 stripped
@@ -860,7 +800,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1267785866
 GameObject:
@@ -1009,11 +949,13 @@ MonoBehaviour:
   SoundFX: {fileID: 1243121128}
   Music: {fileID: 2123672508}
   BackgroundSound: {fileID: 8300000, guid: 3a8a4c2387ea1174787826101e527b0b, type: 3}
+  BossSound: {fileID: 8300000, guid: 99979c809bc4ea44b970d972925b4acc, type: 3}
   Attack1: {fileID: 8300000, guid: 9e47ba4ea98494a4faa7663da8ccc994, type: 3}
   Attack2: {fileID: 8300000, guid: f196ccc28052ba649bcdf7aea355c4be, type: 3}
   Explosion: {fileID: 8300000, guid: cd2e9ae7f4c61b64cbcec2d6233b13c6, type: 3}
   Failed: {fileID: 8300000, guid: 237bd04675c4c204286b82a49c2e2dee, type: 3}
   Crashed: {fileID: 8300000, guid: fe5b85b3b4aa8a846aeb5cae7b310ae2, type: 3}
+  gameOver: {fileID: 8300000, guid: 576217e52707101409d67d096f856894, type: 3}
 --- !u!4 &1477063777
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +973,55 @@ Transform:
   - {fileID: 1243121129}
   m_Father: {fileID: 700881451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1539406757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539406759}
+  - component: {fileID: 1539406758}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1539406758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539406757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddfc4c24efe77c49a9c667c323e31db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManagerController
+  maxLives: 3
+  currentLives: 0
+  maxHealth: 100
+  currentHealth: 0
+  currentScore: 0
+--- !u!4 &1539406759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539406757}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 700881451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1681873190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,15 +1032,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3710483563648725267, guid: fabda0d6295e918429b88dad63cdbaf2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3710483563648725267, guid: fabda0d6295e918429b88dad63cdbaf2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3710483563648725267, guid: fabda0d6295e918429b88dad63cdbaf2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3710483563648725267, guid: fabda0d6295e918429b88dad63cdbaf2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1222,6 +1213,115 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722268150}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1783624380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1783624381}
+  - component: {fileID: 1783624382}
+  - component: {fileID: 1783624383}
+  m_Layer: 0
+  m_Name: Objects
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1783624381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783624380}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 700881451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1783624382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783624380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf11187bdfb8b1b4b8e708eb367f957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnController
+  dogs:
+  - {fileID: 1226566921469968346, guid: cc6b3e636f70b5044994ea3e192717ac, type: 3}
+  - {fileID: 61897182686148305, guid: 08250735777543a429458bca8f4f22f0, type: 3}
+  leftCar:
+  - {fileID: 2851353709106883642, guid: 1ab9998a20190d0488964eb9c0f21fdc, type: 3}
+  - {fileID: 7312853754984219752, guid: de1fede0fee690441a1000eada84f972, type: 3}
+  - {fileID: 8760900576377815220, guid: c5e3fca1e8bc68d458aa838c23b11bb0, type: 3}
+  - {fileID: 6336160028471077121, guid: 3f54ee9050d478b4e9a551149461d30e, type: 3}
+  - {fileID: 7593742948929567171, guid: 59918eae7c65f8f4d924791c2fb0b679, type: 3}
+  rightCar:
+  - {fileID: 5634752279550171341, guid: a572a4ca768f26e47b01706d1a83de77, type: 3}
+  - {fileID: 5815268074856326933, guid: c6d6b1543cf58a44382a8724692d9b7e, type: 3}
+  - {fileID: 7305934563611682280, guid: a87a0f198e237694ba3f7a716bd1c4e4, type: 3}
+  - {fileID: 6067987194385191814, guid: 850f33dfa7eda8748817e446f31b6a24, type: 3}
+  - {fileID: 7593742948929567171, guid: c70edeb18799fd746a1ef7ad96a5afb5, type: 3}
+  leftKid:
+  - {fileID: 7807158912777617597, guid: cd1a2a295ab9c974c8812bbd4a75ff83, type: 3}
+  - {fileID: 289548192201890597, guid: 76890126bbc296e408cdb1656dac5fa0, type: 3}
+  - {fileID: 1375738557391742905, guid: 275c5f06ed4e1e64f9f33e932a8baf05, type: 3}
+  rightKid:
+  - {fileID: 4324561456804164546, guid: 478bef213b971ea47a14e4dc5d9fa3ef, type: 3}
+  - {fileID: 289548192201890597, guid: b042929f0620d2d4196964857f55b9fa, type: 3}
+  - {fileID: 871081706790344141, guid: 0f2372b8f9f308d4982e3d7836d6dc1c, type: 3}
+  dogSpawnInterval: 4
+  carSpawnInterval: 10
+  kidSpawnInterval: 8
+  corgiSpawnZ: 45
+  germanSpawnZ: -45
+  carLeftSpawnZ: 45
+  carRightSpawnZ: -45
+  kidLeftSpawnZ: 45
+  kidRightSpawnZ: -45
+  leftSidewalkX: -15
+  leftStreetX: -4
+  middleStreetX: 0
+  rightStreetX: 4
+  rightSidewalkX: 15
+  leftBikeLane: -10
+  rightBikeLane: 10
+  AudioManager: {fileID: 1477063776}
+  GameUI: {fileID: 497734770}
+--- !u!114 &1783624383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783624380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd878d558515dcd49a38bc9c8c3946cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossLevelController
+  villians: []
+  villianSpawnInterval: 2
+  villianFrontSpawnZ: 45
+  villianBackSpawnZ: -45
+  leftSidewalkX: -15
+  leftStreetX: -4
+  middleStreetX: 0
+  rightStreetX: 3
+  rightSidewalkX: 15
+  AudioManager: {fileID: 1477063776}
+  GameUI: {fileID: 497734770}
 --- !u!1 &1830914569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,6 +1433,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830914569}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2044635894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044635895}
+  - component: {fileID: 2044635896}
+  m_Layer: 0
+  m_Name: SceneLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044635895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044635894}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 700881451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044635896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044635894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a7c96e562d2bf4e8dda6734ca59425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLevelController
+  levelDuration: 8
+  GameManager: {fileID: 1539406758}
 --- !u!1 &2057248653
 GameObject:
   m_ObjectHideFlags: 0

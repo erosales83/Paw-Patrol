@@ -1,28 +1,42 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
 public class GameUIController : MonoBehaviour
 {
+    public TerrainController TerrainController;
     public AudioManagerController AudioManager;
     public SpawnController spawnController;
+    public GameManagerController GameManager;
+    public BossLevelController BossLevel;
     private Label gameOverText_;
+    private Label levelTwo_;
+    private Label levelThree_;
+    private Label level_;
     private Label score_;
     private Label health_;
     private VisualElement[] lives_;
-    public TerrainController TerrainController;
     private Button startButton_;
     private Button restartButton_;
-    public int maxLives = 3;
-    public int currentLives;
-    public int maxHealth = 100;
-    private int currentHealth;
-    private int currentScore;
+    public bool autoStart = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Time.timeScale = 1f;
+        if (autoStart)
+        {
+            if(PlayerInfoController.level == 2)
+            {
+                StartCoroutine(StartLevelTwo());
+            }
+            else if(PlayerInfoController.level == 3)
+            {
+                StartCoroutine(StartLevelThree());
+            }
+        }
     }
 
     // Update is called once per frame
@@ -33,17 +47,27 @@ public class GameUIController : MonoBehaviour
     public void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        lives_ = new VisualElement[3];
+
+        
+        level_ = root.Q<Label>("Level");
         score_ = root.Q<Label>("Score");
         health_ = root.Q<Label>("Health");
-        lives_ = new VisualElement[3];
+
         lives_[0] = root.Q<VisualElement>("Live-1");
         lives_[1] = root.Q<VisualElement>("Live-2");
         lives_[2] = root.Q<VisualElement>("Live-3");
+
         startButton_ = root.Q<Button>("StartButton");
         restartButton_ = root.Q<Button>("RestartButton");
+        gameOverText_ = root.Q<Label>("GameOver");
+        levelTwo_ = root.Q<Label>("LevelTwo");
+        levelThree_ = root.Q<Label>("LevelThree");
+
         startButton_.clicked += OnStartButtonClicked;
         restartButton_.clicked += OnRestartButtonClicked;
-        gameOverText_ = root.Q<Label>("GameOver");
+        levelTwo_.style.display = DisplayStyle.None;
+        levelThree_.style.display = DisplayStyle.None;
         gameOverText_.style.display = DisplayStyle.None;
         restartButton_.style.display = DisplayStyle.None;
     }
@@ -52,45 +76,89 @@ public class GameUIController : MonoBehaviour
         startButton_.clicked -= OnStartButtonClicked;
         restartButton_.clicked -= OnRestartButtonClicked;
     }
-
     void ResetGame()
     {
-        currentLives = maxLives;
-        currentHealth = maxHealth;
-        currentScore = 0;
-        health_.text = currentHealth.ToString() + "%";
-        SetScore(currentScore);
+        GameManager.ResetGameData();
+        health_.text = GameManager.currentHealth + "%";
+        SetScore(GameManager.currentScore);
         foreach (var life in lives_)
         {
             life.style.display = DisplayStyle.Flex;
         }
     }
+
+    void ResetUIOnly()
+    {
+        GameManager.currentScore  = PlayerInfoController.Score;
+        GameManager.currentHealth = PlayerInfoController.Health;
+        GameManager.currentLives  = PlayerInfoController.Lives;
+        SetScore(GameManager.currentScore);
+        health_.text = GameManager.currentHealth + "%";
+
+        for (int i = 0; i < lives_.Length; i++)
+        {
+            lives_[i].style.display = i < GameManager.currentLives ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+    }
     void ResetLevel()
     {
         Debug.Log("RESTART LEVEL");
-        spawnController.StartSpawn();
+        if(PlayerInfoController.level == 3)
+        {
+            GameManager.ResetBossLevelLogic(BossLevel);
+        }
+        else
+        {
+            GameManager.ResetLevelLogic(spawnController);
+        }
     }
-
     public void OnStartButtonClicked()
     {
         ResetGame();
+        level_.text = "Level 1";
+        levelTwo_.style.display = DisplayStyle.None;
+        levelThree_.style.display = DisplayStyle.None;
         gameOverText_.style.display = DisplayStyle.None;
         startButton_.style.display = DisplayStyle.None;
-        Time.timeScale = 1f;
-        TerrainController.StartGame();
-        spawnController.StartSpawn();
-        AudioManager.PlayMusic();
+        restartButton_.style.display = DisplayStyle.None;
+        GameManager.StartGame(TerrainController, spawnController, AudioManager);
+    }
+    public void OnNextLevel()
+    {
+        levelTwo_.style.display = DisplayStyle.None;
+        levelThree_.style.display = DisplayStyle.None;
     }
     public void OnRestartButtonClicked()
     {
-        ResetGame();
-        gameOverText_.style.display = DisplayStyle.None;
-        restartButton_.style.display = DisplayStyle.None;
-        Time.timeScale = 1f;
-        TerrainController.StartGame();
-        spawnController.StartSpawn();
-        AudioManager.PlayMusic();
+        GameManager.RestartGame();
     }
+
+    IEnumerator StartLevelTwo()
+    {
+        startButton_.style.display = DisplayStyle.None;
+        yield return null;
+        level_.text = "Level 2";
+        levelTwo_.style.display = DisplayStyle.Flex;
+        gameOverText_.style.display = DisplayStyle.None;
+        GameManager.StartGame(TerrainController, spawnController, AudioManager);
+        ResetUIOnly();
+        yield return new WaitForSeconds(1f);
+        OnNextLevel();
+    }
+
+    IEnumerator StartLevelThree()
+    {
+        startButton_.style.display = DisplayStyle.None;
+        yield return null;
+        level_.text = "Level 3";
+        levelThree_.style.display = DisplayStyle.Flex;
+        gameOverText_.style.display = DisplayStyle.None;
+        GameManager.StartBossLevel(TerrainController, BossLevel, AudioManager);
+        ResetUIOnly();
+        yield return new WaitForSeconds(1f);
+        OnNextLevel();
+    }
+
     public void SetScore(int score)
     {
         score_.text = score.ToString("D5");
@@ -98,13 +166,9 @@ public class GameUIController : MonoBehaviour
 
     public void TakeHit(int damage)
     {
-        currentHealth -= damage;
-        if (currentHealth < 0)
-        {
-            currentHealth = 0;
-        }
-        health_.text = currentHealth.ToString() + "%";
-        if (currentHealth <= 0)
+        bool died = GameManager.TakeHit(damage);
+        health_.text = GameManager.currentHealth.ToString() + "%";
+        if (died)
         {
             LoseLife();
         }
@@ -112,36 +176,38 @@ public class GameUIController : MonoBehaviour
 
     public void LoseLife()
     {
-        currentLives--;
-        currentHealth = maxHealth;
-        health_.text = currentHealth.ToString() + "%";
-        if (currentLives >= 0 && currentLives < lives_.Length)
+        bool gameOver = GameManager.LoseLife();
+        health_.text = GameManager.currentHealth.ToString() + "%";
+        if (GameManager.currentLives >= 0 && GameManager.currentLives < lives_.Length)
         {
-            lives_[currentLives].style.display = DisplayStyle.None;
+            lives_[GameManager.currentLives].style.display = DisplayStyle.None;
             spawnController.ClearObjects();
             spawnController.StopSpawn();
             ResetLevel();
         }
-        if (currentLives <= 0)
+        if (gameOver)
         {
             GameOver();
         }
-
     }
-
     public void AddScore(int amount)
     {
-        currentScore += amount;
-        SetScore(currentScore);
+        GameManager.AddScore(amount);
+        SetScore(GameManager.currentScore);
     }
 
     private void GameOver()
     {
+        if(PlayerInfoController.level == 3)
+        {
+            GameManager.TriggerBossGameOver(BossLevel, AudioManager);
+        }
+        else
+        {
+            GameManager.TriggerGameOver(spawnController, AudioManager);
+        }
+        AudioManager.Play(AudioManager.gameOver);
         Debug.Log("GAME OVER");
-        Time.timeScale = 0f;
-        AudioManager.StopMusic();
-        spawnController.StopSpawn();
-        spawnController.ClearObjects();
         gameOverText_.style.display = DisplayStyle.Flex;
         restartButton_.style.display = DisplayStyle.Flex;
     }

@@ -4,7 +4,9 @@ public class TargetController : MonoBehaviour
 {
 
     public float dogSpeed = 6f;
-    public float carSpeed = 8f; 
+    public float carSpeed = 8f;
+    public float kidSpeed = 7f;
+    public float villianSpeed = 10f;
     public GameObject rescueEffect;
     public GameObject crashEffect;
     public AudioManagerController AudioManager;
@@ -25,6 +27,14 @@ public class TargetController : MonoBehaviour
         if (gameObject.CompareTag("Car"))
         {
             transform.Translate(Vector3.forward * carSpeed * Time.deltaTime);
+        }
+        if (gameObject.CompareTag("Kid"))
+        {
+            transform.Translate(Vector3.forward * kidSpeed * Time.deltaTime);
+        }
+        if (gameObject.CompareTag("Villian"))
+        {
+            transform.Translate(Vector3.forward * villianSpeed * Time.deltaTime);
         }
     }
 
@@ -59,7 +69,7 @@ public class TargetController : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (gameObject.CompareTag("Car"))
+            if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid"))
             {
                 if (rescueEffect != null)
                 {

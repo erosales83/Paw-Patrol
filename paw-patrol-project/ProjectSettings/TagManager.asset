@@ -12,6 +12,8 @@ TagManager:
   - Boundary
   - WallFront
   - Effect
+  - Kid
+  - Villian
   layers:
   - Default
   - TransparentFX
