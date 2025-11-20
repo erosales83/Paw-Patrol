@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 69452003533916451}
   - component: {fileID: 8364488222291726471}
   - component: {fileID: -7787420448695179228}
+  - component: {fileID: 2897783612324233296}
   m_Layer: 0
   m_Name: SpecialTreat
   m_TagString: PowerUp
@@ -198,8 +199,30 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2897783612324233296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060652052507596975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b455344ecee0abe48bbe6ed44b126d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetController
+  dogSpeed: 6
+  carSpeed: 8
+  kidSpeed: 7
+  villianSpeed: 12
+  PowerUpSpeed: 12
+  rescueEffect: {fileID: 4067684639605738966, guid: 08811944ccab80942a7d482e77d0c534, type: 3}
+  crashEffect: {fileID: 4067684639605738966, guid: 053fa33c041555d40a6229280e097b36, type: 3}
+  AudioManager: {fileID: 0}
+  GameUI: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1 &3454585823447352919
 GameObject:
   m_ObjectHideFlags: 0

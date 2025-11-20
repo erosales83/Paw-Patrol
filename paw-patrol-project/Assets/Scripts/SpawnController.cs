@@ -11,6 +11,7 @@ public class SpawnController : MonoBehaviour
     public float dogSpawnInterval = 4f;
     public float carSpawnInterval = 10f;
     public float kidSpawnInterval = 8f;
+    public float treatSpawnInterval = 15f;
     public float corgiSpawnZ = 45f;
     public float germanSpawnZ = -45f;
     public float carLeftSpawnZ = 45f;
@@ -76,6 +77,7 @@ public class SpawnController : MonoBehaviour
         {
             targetController.AudioManager = AudioManager;
             targetController.GameUI = GameUI;
+            targetController.spawner = this;
         }
     }
     void SpawnCar()
@@ -89,6 +91,7 @@ public class SpawnController : MonoBehaviour
         {
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
+            leftTargetController.spawner = this;
         }
         GameObject randomRightCar = rightCar[Random.Range(0, rightCar.Length)];
         Vector3 rightCarPos = new Vector3(rightStreetX, 0f, carRightSpawnZ);
@@ -99,6 +102,7 @@ public class SpawnController : MonoBehaviour
         {
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
+            rightTargetController.spawner = this;
         }
     }
     void SpawnKid()
@@ -112,6 +116,7 @@ public class SpawnController : MonoBehaviour
         {
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
+            leftTargetController.spawner = this;
         }
 
 
@@ -124,6 +129,57 @@ public class SpawnController : MonoBehaviour
         {
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
+            rightTargetController.spawner = this;
+        }
+    }
+    void SpawnSpecialtreat()
+    {
+        int lane = Random.Range(0, 5);
+        float spawnX = 0f;
+
+        switch (lane)
+        {
+            case 0:
+                spawnX = leftSidewalkX;
+                break;
+            case 1:
+                spawnX = leftStreetX;
+                break;
+            case 2:
+                spawnX = rightStreetX;
+                break;
+            case 3:
+                spawnX = rightSidewalkX;
+                break;
+            case 4:
+                spawnX = middleStreetX;
+                break;
+        }
+
+        int frontOrBack = Random.Range(0, 2);
+        float spawnZ = 0f;
+        Quaternion rotation = Quaternion.identity;
+        switch(frontOrBack)
+        {
+            case 0:
+                spawnZ = -45f;
+                break;
+            case 1:
+                rotation = Quaternion.Euler(0f, 180f, 0f);
+                spawnZ = 45f;
+                break;
+        }
+
+        GameObject special = specialTreat;
+        Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
+        GameObject treat = Instantiate(special, spawnPos, rotation);
+        TargetController targetController = treat.GetComponent<TargetController>();
+        if (targetController != null)
+        {
+            targetController.AudioManager = AudioManager;
+            targetController.GameUI = GameUI;
+            targetController.spawner = this;
+
         }
     }
     public void StartSpawn()
@@ -132,12 +188,14 @@ public class SpawnController : MonoBehaviour
         {
             InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
             InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
+            InvokeRepeating(nameof(SpawnSpecialtreat), 3f, treatSpawnInterval);
         }
         else if (PlayerInfoController.level == 2 || PlayerInfoController.level == 4)
         {
             InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
             InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
             InvokeRepeating(nameof(SpawnKid), 3f, kidSpawnInterval);
+            InvokeRepeating(nameof(SpawnSpecialtreat), 3f, treatSpawnInterval);
         }
     }
     public void ClearObjects()
@@ -155,11 +213,31 @@ public class SpawnController : MonoBehaviour
         {
             Destroy(kid);
         }
+        foreach(GameObject treat in GameObject.FindGameObjectsWithTag("PowerUp"))
+        {
+            Destroy(treat);
+        }
+    }
+     public void ClearBadObjects()
+    {
+        foreach (GameObject car in GameObject.FindGameObjectsWithTag("Car")) 
+        {
+            Destroy(car); 
+        }
+        foreach(GameObject kid in GameObject.FindGameObjectsWithTag("Kid"))
+        {
+            Destroy(kid);
+        }
+        foreach(GameObject treat in GameObject.FindGameObjectsWithTag("PowerUp"))
+        {
+            Destroy(treat);
+        }
     }
     public void StopSpawn()
     {
         CancelInvoke(nameof(SpawnDog));
         CancelInvoke(nameof(SpawnCar));
         CancelInvoke(nameof(SpawnKid));
+        CancelInvoke(nameof(SpawnSpecialtreat));
     }
 }

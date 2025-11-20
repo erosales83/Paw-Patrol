@@ -7,10 +7,12 @@ public class TargetController : MonoBehaviour
     public float carSpeed = 8f;
     public float kidSpeed = 7f;
     public float villianSpeed = 12f;
+    public float PowerUpSpeed = 12f;
     public GameObject rescueEffect;
     public GameObject crashEffect;
     public AudioManagerController AudioManager;
     public GameUIController GameUI;
+    public SpawnController spawner;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +38,10 @@ public class TargetController : MonoBehaviour
         {
             transform.Translate(Vector3.forward * villianSpeed * Time.deltaTime);
         }
+        if (gameObject.CompareTag("PowerUp"))
+        {
+            transform.Translate(Vector3.forward * PowerUpSpeed * Time.deltaTime);
+        }
     }
 
     //Collision: If player collides with Dog Game over. If treat collides with dog then particles.
@@ -45,37 +51,42 @@ public class TargetController : MonoBehaviour
         {
             return;
         }
-        if (gameObject.name.Contains("corgi"))
+        if (gameObject.name.Contains("corgi") && collision.gameObject.CompareTag("WallBack"))
         {
-            if (collision.gameObject.CompareTag("WallBack"))
+            if (AudioManager != null)
             {
-                if (AudioManager != null)
-                {
-                    AudioManager.Play(AudioManager.Failed);
-                }
-                GameUI.TakeHit(25);
-                Destroy(gameObject);
+                AudioManager.Play(AudioManager.Failed);
             }
+            GameUI.TakeHit(25);
+            Destroy(gameObject);
         }
 
-        else if (gameObject.name.Contains("germanshepherd"))
+        else if (gameObject.name.Contains("germanshepherd") && collision.gameObject.CompareTag("WallFront"))
         {
-            if (collision.gameObject.CompareTag("WallFront"))
+            if (AudioManager != null)
             {
-                if (AudioManager != null)
-                {
-                    AudioManager.Play(AudioManager.Failed);
-                }
-                GameUI.TakeHit(25);
-                Destroy(gameObject);
+                AudioManager.Play(AudioManager.Failed);
             }
+            GameUI.TakeHit(25);
+            Destroy(gameObject);
         }
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid"))
+            if (gameObject.CompareTag("PowerUp"))
             {
-                if (rescueEffect != null)
+                GameUI.AddScore(100);
+                spawner.ClearBadObjects();
+                if (AudioManager != null)
+                {
+                    AudioManager.Play(AudioManager.specialTreatSound);
+                }
+            }
+            else
+            {
+                if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid"))
+                {
+                    if (rescueEffect != null)
                 {
                     Instantiate(crashEffect, transform.position, Quaternion.identity);
                     if (AudioManager != null)
@@ -93,25 +104,38 @@ public class TargetController : MonoBehaviour
             }
             GameUI.TakeHit(25);
             Destroy(gameObject);
+            }
+            return;
         }
 
-        if(gameObject.CompareTag("Dog"))
+        if(gameObject.CompareTag("Dog") && collision.gameObject.CompareTag("Treat"))
         {
-            if (collision.gameObject.CompareTag("Treat"))
+            if (AudioManager != null)
             {
-                if (AudioManager != null)
-                {
-                    AudioManager.Play(AudioManager.Explosion);
-                }
-                if (rescueEffect != null)
-                {
-                    Instantiate(rescueEffect, transform.position, Quaternion.identity);
-                }
                 GameUI.AddScore(100);
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
-                
+                AudioManager.Play(AudioManager.Explosion);
             }
+            if (rescueEffect != null)
+            {
+                Instantiate(rescueEffect, transform.position, Quaternion.identity);
+            }
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        if(gameObject.CompareTag("PowerUp") && collision.gameObject.CompareTag("Treat")) 
+        {
+            if (AudioManager != null)
+            {           
+                GameUI.AddScore(100);
+                spawner.ClearBadObjects();       
+                AudioManager.Play(AudioManager.specialTreatSound);
+            }
+            if (rescueEffect != null)
+            {                    
+                Instantiate(rescueEffect, transform.position, Quaternion.identity);
+            }
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

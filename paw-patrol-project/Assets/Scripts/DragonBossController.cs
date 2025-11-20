@@ -6,6 +6,8 @@ public class DragonBossController : MonoBehaviour
     public AudioManagerController AudioManager;
     public GameManagerController GameManager;
     public GameUIController GameUI;
+    public BossLevelController bossLevel;
+    public float PowerUpSpeed = 12f;
     public int maxHits = 20;
     private int currentHits;
     public float moveSpeed = 5f;
@@ -52,19 +54,43 @@ public class DragonBossController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Treat"))
+        if ( gameObject.CompareTag("Boss") && collision.gameObject.CompareTag("Treat"))
         {
+            Destroy(collision.gameObject);
+            if (AudioManager != null)
+            {
+                AudioManager.Play(AudioManager.dragonSound);
+            }
+            TakeHit();
             return;
         }
-        Destroy(collision.gameObject);
-        if (AudioManager != null)
+        if(gameObject.CompareTag("PowerUp") && collision.gameObject.CompareTag("Treat"))
         {
-            AudioManager.Play(AudioManager.dragonSound);
+            GameUI.AddScore(100);
+            bossLevel.ClearBadObjects();
+            if (AudioManager != null)
+            {
+                AudioManager.Play(AudioManager.specialTreatSound);
+            }
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            return;
+        } 
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (gameObject.CompareTag("PowerUp"))
+            {
+                GameUI.AddScore(100);
+                bossLevel.ClearBadObjects();
+                if (AudioManager != null)
+                {
+                    AudioManager.Play(AudioManager.specialTreatSound);
+                }
+                Destroy(gameObject);
+            }
+            return;
         }
-        Debug.Log("Treat hit dragon!");
-        TakeHit();
     }
-
     void TakeHit()
     {
         currentHits++;

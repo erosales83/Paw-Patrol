@@ -537,6 +537,8 @@ MonoBehaviour:
   - {fileID: 5029093538799344424, guid: 466d0c35489d29c4f89d23886810428c, type: 3}
   - {fileID: 4647385085009159818, guid: b370330d4c024324193279b794d2fbd1, type: 3}
   dragon: {fileID: 2132637239080067500, guid: 5b69c0e9915b0e745b580819023c82e0, type: 3}
+  specialTreat: {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
+  treatSpawnInterval: 15
   villianSpawnInterval: 2
   villianFrontSpawnZ: 45
   villianBackSpawnZ: -45
@@ -587,6 +589,7 @@ MonoBehaviour:
   dogSpawnInterval: 4
   carSpawnInterval: 10
   kidSpawnInterval: 8
+  treatSpawnInterval: 15
   corgiSpawnZ: 45
   germanSpawnZ: -45
   carLeftSpawnZ: 45
@@ -1073,6 +1076,7 @@ MonoBehaviour:
   Crashed: {fileID: 8300000, guid: fe5b85b3b4aa8a846aeb5cae7b310ae2, type: 3}
   gameOver: {fileID: 8300000, guid: 576217e52707101409d67d096f856894, type: 3}
   dragonSound: {fileID: 8300000, guid: dc0b764e7aca8d24d8d229466a4c4def, type: 3}
+  specialTreatSound: {fileID: 8300000, guid: cd0e7537e3f61a845885035b2f5b29bf, type: 3}
 --- !u!4 &1477063777
 Transform:
   m_ObjectHideFlags: 0

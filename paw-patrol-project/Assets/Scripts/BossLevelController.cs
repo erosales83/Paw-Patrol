@@ -5,6 +5,8 @@ public class BossLevelController : MonoBehaviour
 {
     public GameObject[] villians;
     public GameObject dragon;
+    public GameObject specialTreat;
+    public float treatSpawnInterval = 15f;
     public float villianSpawnInterval = 1f;
     public float villianFrontSpawnZ = 45f;
     public float villianBackSpawnZ = -45f;
@@ -78,11 +80,60 @@ public class BossLevelController : MonoBehaviour
             targetController.GameUI = GameUI;
         }
     }
+    void SpawnSpecialtreat()
+    {
+        int lane = Random.Range(0, 5);
+        float spawnX = 0f;
+
+        switch (lane)
+        {
+            case 0:
+                spawnX = leftSidewalkX;
+                break;
+            case 1:
+                spawnX = leftStreetX;
+                break;
+            case 2:
+                spawnX = rightStreetX;
+                break;
+            case 3:
+                spawnX = rightSidewalkX;
+                break;
+            case 4:
+                spawnX = middleStreetX;
+                break;
+        }
+
+        int frontOrBack = Random.Range(0, 2);
+        float spawnZ = 0f;
+        Quaternion rotation = Quaternion.identity;
+        switch(frontOrBack)
+        {
+            case 0:
+                spawnZ = -45f;
+                break;
+            case 1:
+                rotation = Quaternion.Euler(0f, 180f, 0f);
+                spawnZ = 45f;
+                break;
+        }
+
+        GameObject special = specialTreat;
+        Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
+        GameObject treat = Instantiate(special, spawnPos, rotation);
+        TargetController targetController = treat.GetComponent<TargetController>();
+        if (targetController != null)
+        {
+            targetController.AudioManager = AudioManager;
+            targetController.GameUI = GameUI;
+        }
+    }
 
     public void StartSpawn()
     {
         SpawnDragon();
         InvokeRepeating(nameof(SpawnVillian), 1f, villianSpawnInterval);
+        InvokeRepeating(nameof(SpawnSpecialtreat), 3f, treatSpawnInterval);
     }
     public void ClearObjects()
     {
@@ -90,14 +141,22 @@ public class BossLevelController : MonoBehaviour
         {
             Destroy(villian);
         }
-        foreach(GameObject cage in GameObject.FindGameObjectsWithTag("cage"))
+        foreach(GameObject treat in GameObject.FindGameObjectsWithTag("PowerUp"))
         {
-            Destroy(cage);
+            Destroy(treat);
+        }
+    }
+    public void ClearBadObjects()
+    {
+        foreach(GameObject villian in GameObject.FindGameObjectsWithTag("Villian"))
+        {
+            Destroy(villian);
         }
     }
     public void StopSpawn()
     {
         CancelInvoke(nameof(SpawnVillian));
+        CancelInvoke(nameof(SpawnSpecialtreat));
     }
     void SpawnDragon()
     {
@@ -117,6 +176,7 @@ public class BossLevelController : MonoBehaviour
             boss.AudioManager = AudioManager;
             boss.GameUI = GameUI;
             boss.GameManager = GameManager;
+            boss.bossLevel = this;
         }
     }
 }
