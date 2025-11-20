@@ -15,6 +15,7 @@ public class GameUIController : MonoBehaviour
     private Label gameOverText_;
     private Label levelTwo_;
     private Label levelThree_;
+    private Label levelFour_;
     private Label level_;
     private Label score_;
     private Label health_;
@@ -35,6 +36,10 @@ public class GameUIController : MonoBehaviour
             else if(PlayerInfoController.level == 3)
             {
                 StartCoroutine(StartLevelThree());
+            }
+            else if(PlayerInfoController.level == 4)
+            {
+                StartCoroutine(StartLevelFour());
             }
         }
     }
@@ -63,11 +68,13 @@ public class GameUIController : MonoBehaviour
         gameOverText_ = root.Q<Label>("GameOver");
         levelTwo_ = root.Q<Label>("LevelTwo");
         levelThree_ = root.Q<Label>("LevelThree");
+        levelFour_ = root.Q<Label>("LevelFour");
 
         startButton_.clicked += OnStartButtonClicked;
         restartButton_.clicked += OnRestartButtonClicked;
         levelTwo_.style.display = DisplayStyle.None;
         levelThree_.style.display = DisplayStyle.None;
+        levelFour_.style.display = DisplayStyle.None;
         gameOverText_.style.display = DisplayStyle.None;
         restartButton_.style.display = DisplayStyle.None;
     }
@@ -127,6 +134,7 @@ public class GameUIController : MonoBehaviour
     {
         levelTwo_.style.display = DisplayStyle.None;
         levelThree_.style.display = DisplayStyle.None;
+        levelFour_.style.display = DisplayStyle.None;
     }
     public void OnRestartButtonClicked()
     {
@@ -154,6 +162,19 @@ public class GameUIController : MonoBehaviour
         levelThree_.style.display = DisplayStyle.Flex;
         gameOverText_.style.display = DisplayStyle.None;
         GameManager.StartBossLevel(TerrainController, BossLevel, AudioManager);
+        ResetUIOnly();
+        yield return new WaitForSeconds(1f);
+        OnNextLevel();
+    }
+
+    IEnumerator StartLevelFour()
+    {
+        startButton_.style.display = DisplayStyle.None;
+        yield return null;
+        level_.text = "Level 4";
+        levelFour_.style.display = DisplayStyle.Flex;
+        gameOverText_.style.display = DisplayStyle.None;
+        GameManager.StartGame(TerrainController, spawnController, AudioManager);
         ResetUIOnly();
         yield return new WaitForSeconds(1f);
         OnNextLevel();

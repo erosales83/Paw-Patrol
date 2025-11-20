@@ -956,6 +956,7 @@ MonoBehaviour:
   Failed: {fileID: 8300000, guid: 237bd04675c4c204286b82a49c2e2dee, type: 3}
   Crashed: {fileID: 8300000, guid: fe5b85b3b4aa8a846aeb5cae7b310ae2, type: 3}
   gameOver: {fileID: 8300000, guid: 576217e52707101409d67d096f856894, type: 3}
+  dragonSound: {fileID: 8300000, guid: dc0b764e7aca8d24d8d229466a4c4def, type: 3}
 --- !u!4 &1477063777
 Transform:
   m_ObjectHideFlags: 0
@@ -1311,7 +1312,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd878d558515dcd49a38bc9c8c3946cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossLevelController
-  villians: []
+  villians:
+  - {fileID: 4804897938050613708, guid: 991ff81a974e9fd4d9311e499b278d48, type: 3}
+  - {fileID: 1975799078540899764, guid: 12b30d74c284d3c4baf7b7ab3447d36b, type: 3}
+  - {fileID: 7242333728747026439, guid: 419bd334aee12c845bbc0d310b06b6ca, type: 3}
+  - {fileID: 5029093538799344424, guid: 466d0c35489d29c4f89d23886810428c, type: 3}
+  - {fileID: 4647385085009159818, guid: b370330d4c024324193279b794d2fbd1, type: 3}
+  dragon: {fileID: 2132637239080067500, guid: 5b69c0e9915b0e745b580819023c82e0, type: 3}
   villianSpawnInterval: 2
   villianFrontSpawnZ: 45
   villianBackSpawnZ: -45
@@ -1477,7 +1484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a7c96e562d2bf4e8dda6734ca59425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLevelController
-  levelDuration: 8
+  levelDuration: 40
   GameManager: {fileID: 1539406758}
 --- !u!1 &2057248653
 GameObject:

@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossLevelController : MonoBehaviour
 {
     public GameObject[] villians;
-    public GameObject[] cages;
     public GameObject dragon;
-    public float villianSpawnInterval = 2f;
+    public float villianSpawnInterval = 1f;
     public float villianFrontSpawnZ = 45f;
     public float villianBackSpawnZ = -45f;
     public float leftSidewalkX = -14f;
@@ -13,6 +13,7 @@ public class BossLevelController : MonoBehaviour
     public float middleStreetX = 0f;
     public float rightStreetX = 5f;
     public float rightSidewalkX = 14f;
+    private GameObject dragonInstance;
     public AudioManagerController AudioManager;
     public GameUIController GameUI;
 
@@ -20,6 +21,7 @@ public class BossLevelController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -30,7 +32,7 @@ public class BossLevelController : MonoBehaviour
 
     void SpawnVillian()
     {
-        int lane = Random.Range(0, 4);
+        int lane = Random.Range(0, 5);
         float spawnX = 0f;
 
         switch (lane)
@@ -46,6 +48,9 @@ public class BossLevelController : MonoBehaviour
                 break;
             case 3:
                 spawnX = rightSidewalkX;
+                break;
+            case 4:
+                spawnX = middleStreetX;
                 break;
         }
 
@@ -75,6 +80,7 @@ public class BossLevelController : MonoBehaviour
 
     public void StartSpawn()
     {
+        SpawnDragon();
         InvokeRepeating(nameof(SpawnVillian), 1f, villianSpawnInterval);
     }
     public void ClearObjects()
@@ -83,9 +89,32 @@ public class BossLevelController : MonoBehaviour
         {
             Destroy(villian);
         }
+        foreach(GameObject cage in GameObject.FindGameObjectsWithTag("cage"))
+        {
+            Destroy(cage);
+        }
     }
     public void StopSpawn()
     {
         CancelInvoke(nameof(SpawnVillian));
+    }
+    void SpawnDragon()
+    {
+        if(PlayerInfoController.level != 3)
+        {
+            return;
+        }
+        if(dragonInstance != null)
+        {
+            return;
+        }
+        Vector3 pos = new Vector3(0,0, 35f);
+        dragonInstance = Instantiate(dragon, pos, Quaternion.Euler(0f, 180f, 0f));
+        DragonBossController boss = dragonInstance.GetComponent<DragonBossController>();
+        if (boss != null)
+        {
+            boss.AudioManager = AudioManager;
+            boss.GameUI = GameUI;
+        }
     }
 }

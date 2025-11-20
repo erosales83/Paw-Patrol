@@ -6,7 +6,7 @@ public class TargetController : MonoBehaviour
     public float dogSpeed = 6f;
     public float carSpeed = 8f;
     public float kidSpeed = 7f;
-    public float villianSpeed = 10f;
+    public float villianSpeed = 12f;
     public GameObject rescueEffect;
     public GameObject crashEffect;
     public AudioManagerController AudioManager;
@@ -41,6 +41,10 @@ public class TargetController : MonoBehaviour
     //Collision: If player collides with Dog Game over. If treat collides with dog then particles.
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            return;
+        }
         if (gameObject.name.Contains("corgi"))
         {
             if (collision.gameObject.CompareTag("WallBack"))

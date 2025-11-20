@@ -13,6 +13,7 @@ public class AudioManagerController : MonoBehaviour
     public AudioClip Failed;
     public AudioClip Crashed;
     public AudioClip gameOver;
+    public AudioClip dragonSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

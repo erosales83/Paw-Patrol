@@ -132,7 +132,7 @@ public class SpawnController : MonoBehaviour
             InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
             InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
         }
-        else if (PlayerInfoController.level == 2)
+        else if (PlayerInfoController.level == 2 || PlayerInfoController.level == 4)
         {
             InvokeRepeating(nameof(SpawnDog), 2f, dogSpawnInterval);
             InvokeRepeating(nameof(SpawnCar), 3f, carSpawnInterval);
