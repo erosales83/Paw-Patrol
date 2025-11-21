@@ -91,7 +91,7 @@ public class TargetController : MonoBehaviour
             }
             else
             {
-                if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid") || gameObject.CompareTag("Villian") || gameObject.CompareTag("Dog"))
+                if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid"))
                 {
                     if (crashEffect != null)
                     {   
@@ -99,17 +99,17 @@ public class TargetController : MonoBehaviour
                         if (AudioManager != null)
                         {
                             AudioManager.Play(AudioManager.Crashed);
-                        }   
-                    }
-                    else
-                    {
-                        if (AudioManager != null)
-                        {
-                            AudioManager.Play(AudioManager.Failed);
                         }
-                    }
-                    GameUI.TakeHit(25);
+                    }  
                 }
+                else
+                {
+                    if (AudioManager != null)
+                    {
+                        AudioManager.Play(AudioManager.Failed);
+                    }                    
+                }
+                GameUI.TakeHit(25);
             }
             Destroy(gameObject);
             return;
