@@ -7,7 +7,7 @@ public class SpawnController : MonoBehaviour
     public GameObject[] rightCar;
     public GameObject[] leftKid;
     public GameObject[] rightKid;
-    public GameObject specialTreat;
+    public GameObject[] specialTreat;
     public float dogSpawnInterval = 4f;
     public float carSpawnInterval = 10f;
     public float kidSpawnInterval = 8f;
@@ -26,6 +26,7 @@ public class SpawnController : MonoBehaviour
     public float leftBikeLane = -10f;
     public float rightBikeLane = 10f;
     public AudioManagerController AudioManager;
+    public GameManagerController gameManager;
     public GameUIController GameUI;
 
 
@@ -77,6 +78,7 @@ public class SpawnController : MonoBehaviour
         {
             targetController.AudioManager = AudioManager;
             targetController.GameUI = GameUI;
+            targetController.gameManager = gameManager;
             targetController.spawner = this;
             targetController.bossLevel = null;
         }
@@ -92,6 +94,7 @@ public class SpawnController : MonoBehaviour
         {
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
+            leftTargetController.gameManager = gameManager;
             leftTargetController.spawner = this;
             leftTargetController.bossLevel = null;
         }
@@ -104,6 +107,7 @@ public class SpawnController : MonoBehaviour
         {
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
+            rightTargetController.gameManager = gameManager;
             rightTargetController.spawner = this;
             rightTargetController.bossLevel = null;
         }
@@ -119,6 +123,7 @@ public class SpawnController : MonoBehaviour
         {
             leftTargetController.AudioManager = AudioManager;
             leftTargetController.GameUI = GameUI;
+            leftTargetController.gameManager = gameManager;
             leftTargetController.spawner = this;
             leftTargetController.bossLevel = null;
         }
@@ -133,6 +138,7 @@ public class SpawnController : MonoBehaviour
         {
             rightTargetController.AudioManager = AudioManager;
             rightTargetController.GameUI = GameUI;
+            rightTargetController.gameManager = gameManager;
             rightTargetController.spawner = this;
             rightTargetController.bossLevel = null;
         }
@@ -175,7 +181,7 @@ public class SpawnController : MonoBehaviour
                 break;
         }
 
-        GameObject special = specialTreat;
+        GameObject special = specialTreat[Random.Range(0, specialTreat.Length)];
         Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
         GameObject treat = Instantiate(special, spawnPos, rotation);
         TargetController targetController = treat.GetComponent<TargetController>();
@@ -183,6 +189,7 @@ public class SpawnController : MonoBehaviour
         {
             targetController.AudioManager = AudioManager;
             targetController.GameUI = GameUI;
+            targetController.gameManager = gameManager;
             targetController.spawner = this;
             targetController.bossLevel = null;
 
@@ -234,9 +241,13 @@ public class SpawnController : MonoBehaviour
         {
             Destroy(kid);
         }
-        foreach(GameObject treat in GameObject.FindGameObjectsWithTag("PowerUp"))
+    }
+    public void ClearDogObjects()
+    {
+        foreach (GameObject dog in GameObject.FindGameObjectsWithTag("Dog"))
         {
-            Destroy(treat);
+            Destroy(dog);
+
         }
     }
     public void StopSpawn()

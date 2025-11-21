@@ -88,6 +88,7 @@ public class GameManagerController : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        PlayerInfoController.level = 1;
         SceneManager.LoadScene("AssignmentFinalProject");
     }
     public void ResetGameData()

@@ -537,9 +537,12 @@ MonoBehaviour:
   - {fileID: 5029093538799344424, guid: 466d0c35489d29c4f89d23886810428c, type: 3}
   - {fileID: 4647385085009159818, guid: b370330d4c024324193279b794d2fbd1, type: 3}
   dragon: {fileID: 2132637239080067500, guid: 5b69c0e9915b0e745b580819023c82e0, type: 3}
-  specialTreat: {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
-  treatSpawnInterval: 15
-  villianSpawnInterval: 2
+  specialTreat:
+  - {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
+  - {fileID: 2060652052507596975, guid: 0d157bb7184f62c45ae77d1aa4c72e9b, type: 3}
+  - {fileID: 4740000118784911588, guid: e96bd52c124b9f541963510bee95ddf0, type: 3}
+  treatSpawnInterval: 10
+  villianSpawnInterval: 1
   villianFrontSpawnZ: 45
   villianBackSpawnZ: -45
   leftSidewalkX: -15
@@ -549,7 +552,7 @@ MonoBehaviour:
   rightSidewalkX: 15
   AudioManager: {fileID: 1477063776}
   GameUI: {fileID: 497734770}
-  GameManager: {fileID: 1530068734}
+  gameManager: {fileID: 1530068734}
 --- !u!114 &434616568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,7 +588,10 @@ MonoBehaviour:
   - {fileID: 4324561456804164546, guid: 478bef213b971ea47a14e4dc5d9fa3ef, type: 3}
   - {fileID: 289548192201890597, guid: b042929f0620d2d4196964857f55b9fa, type: 3}
   - {fileID: 871081706790344141, guid: 0f2372b8f9f308d4982e3d7836d6dc1c, type: 3}
-  specialTreat: {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
+  specialTreat:
+  - {fileID: 2060652052507596975, guid: f54717326827c044b9301ea417a02a84, type: 3}
+  - {fileID: 4740000118784911588, guid: e96bd52c124b9f541963510bee95ddf0, type: 3}
+  - {fileID: 2060652052507596975, guid: 0d157bb7184f62c45ae77d1aa4c72e9b, type: 3}
   dogSpawnInterval: 4
   carSpawnInterval: 10
   kidSpawnInterval: 8
@@ -604,6 +610,7 @@ MonoBehaviour:
   leftBikeLane: -10
   rightBikeLane: 10
   AudioManager: {fileID: 1477063776}
+  gameManager: {fileID: 1530068734}
   GameUI: {fileID: 497734770}
 --- !u!1 &497734767
 GameObject:

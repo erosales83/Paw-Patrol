@@ -14,6 +14,7 @@ public class TargetController : MonoBehaviour
     public GameUIController GameUI;
     public SpawnController spawner;
     public BossLevelController bossLevel;
+    public GameManagerController gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +40,7 @@ public class TargetController : MonoBehaviour
         {
             transform.Translate(Vector3.forward * villianSpeed * Time.deltaTime);
         }
-        if (gameObject.CompareTag("PowerUp"))
+        if (gameObject.CompareTag("PowerUp") || gameObject.CompareTag("PowerUp2") || gameObject.CompareTag("PowerUp3"))
         {
             transform.Translate(Vector3.forward * PowerUpSpeed * Time.deltaTime);
         }
@@ -84,6 +85,34 @@ public class TargetController : MonoBehaviour
                 {
                     bossLevel.ClearBadObjects();
                 }
+                if (AudioManager != null)
+                {
+                    AudioManager.Play(AudioManager.specialTreatSound);
+                }
+            }
+            else if (gameObject.CompareTag("PowerUp2"))
+            {
+                GameUI.AddScore(1000);
+                if(spawner != null)
+                {
+                    spawner.ClearDogObjects();
+                }
+                if (bossLevel != null)
+                {
+                    bossLevel.ClearDogObjects();
+                }
+                if (AudioManager != null)
+                {
+                    AudioManager.Play(AudioManager.specialTreatSound);
+                }
+            }
+            else if (gameObject.CompareTag("PowerUp3"))
+            {
+                GameUI.AddScore(100);
+                gameManager.currentHealth = gameManager.maxHealth;
+                gameManager.currentLives = gameManager.maxLives;     
+                GameUI.ResetHearts();
+                GameUI.TakeHit(0);
                 if (AudioManager != null)
                 {
                     AudioManager.Play(AudioManager.specialTreatSound);
@@ -143,10 +172,38 @@ public class TargetController : MonoBehaviour
                 }     
                 AudioManager.Play(AudioManager.specialTreatSound);
             }
-            if (rescueEffect != null)
-            {                    
-                Instantiate(rescueEffect, transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        if(gameObject.CompareTag("PowerUp2") && collision.gameObject.CompareTag("Treat")) 
+        {
+            if (AudioManager != null)
+            {           
+                GameUI.AddScore(1000);
+                if(spawner != null)
+                {
+                    spawner.ClearDogObjects();
+                }
+                if (bossLevel != null)
+                {
+                    bossLevel.ClearDogObjects();
+                }     
+                AudioManager.Play(AudioManager.specialTreatSound);
             }
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        if(gameObject.CompareTag("PowerUp3") && collision.gameObject.CompareTag("Treat")) 
+        {
+            if (AudioManager != null)
+            {
+                AudioManager.Play(AudioManager.specialTreatSound);
+            }
+            GameUI.AddScore(100);
+            gameManager.currentHealth = gameManager.maxHealth;
+            gameManager.currentLives = gameManager.maxLives;     
+            GameUI.ResetHearts();
+            GameUI.TakeHit(0);
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

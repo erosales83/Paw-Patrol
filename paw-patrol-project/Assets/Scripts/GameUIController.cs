@@ -233,4 +233,11 @@ public class GameUIController : MonoBehaviour
         gameOverText_.style.display = DisplayStyle.Flex;
         restartButton_.style.display = DisplayStyle.Flex;
     }
+    public void ResetHearts()
+    {
+        foreach (var life in lives_)
+        {
+            life.style.display = DisplayStyle.Flex;
+        }
+    }
 }

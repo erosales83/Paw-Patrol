@@ -5,7 +5,7 @@ public class BossLevelController : MonoBehaviour
 {
     public GameObject[] villians;
     public GameObject dragon;
-    public GameObject specialTreat;
+    public GameObject[] specialTreat;
     public float treatSpawnInterval = 15f;
     public float villianSpawnInterval = 1f;
     public float villianFrontSpawnZ = 45f;
@@ -18,7 +18,7 @@ public class BossLevelController : MonoBehaviour
     private GameObject dragonInstance;
     public AudioManagerController AudioManager;
     public GameUIController GameUI;
-    public GameManagerController GameManager;
+    public GameManagerController gameManager;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,6 +78,7 @@ public class BossLevelController : MonoBehaviour
         {
             target.AudioManager = AudioManager;
             target.GameUI = GameUI;
+            target.gameManager = gameManager;
             target.spawner = null;
             target.bossLevel = this;
         }
@@ -120,7 +121,7 @@ public class BossLevelController : MonoBehaviour
                 break;
         }
 
-        GameObject special = specialTreat;
+        GameObject special = specialTreat[Random.Range(0, specialTreat.Length)];
         Vector3 spawnPos = new Vector3(spawnX, 0f, spawnZ);
         GameObject treat = Instantiate(special, spawnPos, rotation);
         TargetController target = treat.GetComponent<TargetController>();
@@ -128,6 +129,7 @@ public class BossLevelController : MonoBehaviour
         {
             target.AudioManager = AudioManager;
             target.GameUI = GameUI;
+            target.gameManager = gameManager;
             target.spawner = null;
             target.bossLevel = this;
         }
@@ -157,6 +159,14 @@ public class BossLevelController : MonoBehaviour
             Destroy(villian);
         }
     }
+    public void ClearDogObjects()
+    {
+        foreach (GameObject dog in GameObject.FindGameObjectsWithTag("Dog"))
+        {
+            Destroy(dog);
+
+        }
+    }
     public void StopSpawn()
     {
         CancelInvoke(nameof(SpawnVillian));
@@ -179,7 +189,7 @@ public class BossLevelController : MonoBehaviour
         {
             boss.AudioManager = AudioManager;
             boss.GameUI = GameUI;
-            boss.GameManager = GameManager;
+            boss.GameManager = gameManager;
             boss.bossLevel = this;
         }
     }
