@@ -91,9 +91,9 @@ public class TargetController : MonoBehaviour
             }
             else
             {
-                if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid") || gameObject.CompareTag("Villian"))
+                if (gameObject.CompareTag("Car") || gameObject.CompareTag("Kid") || gameObject.CompareTag("Villian") || gameObject.CompareTag("Dog"))
                 {
-                    if (rescueEffect != null)
+                    if (crashEffect != null)
                     {   
                         Instantiate(crashEffect, transform.position, Quaternion.identity);
                         if (AudioManager != null)
@@ -113,7 +113,7 @@ public class TargetController : MonoBehaviour
             }
             Destroy(gameObject);
             return;
-    }
+        }
         if(gameObject.CompareTag("Dog") && collision.gameObject.CompareTag("Treat"))
         {
             if (AudioManager != null)
